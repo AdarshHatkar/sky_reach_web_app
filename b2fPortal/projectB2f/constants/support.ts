@@ -1,17 +1,14 @@
-const supportMethodIconsNamesArr = [
-    "whatsapp",
-    "email",
-    "instagram",
-    "phone",
-    "telegram",
-    "discord",
-] as const;
 
-export type TSupportMethodIconsNames =
-    (typeof supportMethodIconsNamesArr)[number];
+
+const supportMethodIconsNamesArr = ["whatsapp", "email", "instagram", "phone", "telegram", "discord"] as const;
+
+
+export type TSupportMethodIconsNames = typeof supportMethodIconsNamesArr[number];
 
 type TSupportMethodIconsNamesObj = {
+
     [K in TSupportMethodIconsNames]: K;
+
 };
 
 const supportMethodIconsNamesObj = Object.fromEntries(
@@ -22,5 +19,7 @@ const supportMethodIconsNamesObj = Object.fromEntries(
 
 export const supportMethodIconsNames = {
     arr: supportMethodIconsNamesArr,
-    obj: supportMethodIconsNamesObj,
+    obj: supportMethodIconsNamesObj
 };
+
+

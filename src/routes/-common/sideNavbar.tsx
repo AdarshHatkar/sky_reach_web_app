@@ -1,23 +1,17 @@
 import { Avatar } from "@nextui-org/react";
 import { useNavigate } from "@tanstack/react-router";
 import { memo, useRef } from "react";
-import { FaShare, FaUserEdit } from "react-icons/fa";
+import { FaUserEdit } from "react-icons/fa";
 import { GrLogout } from "react-icons/gr";
-import { IoMdInformationCircleOutline } from "react-icons/io";
-import { MdLeaderboard } from "react-icons/md";
-import {
-    RiCloseFill,
-    RiCustomerService2Fill,
-    RiFeedbackFill,
-} from "react-icons/ri";
+import { RiCloseFill, RiCustomerService2Fill } from "react-icons/ri";
 import { useOnClickOutside } from "usehooks-ts";
 import demoUser from "../../assets/images/demoUserProfile.png";
-import { isLocalEnvironnement } from "../../helpers/config";
 import { TCleanedNavigateOptions } from "../../helpers/types/routes";
 import { appUiStore } from "../../stores/appUiStore";
 import { authStore } from "../../stores/authStore";
 import { gamingAppStore } from "../../stores/gamingAppStore";
 import { userStore } from "../../stores/userStore";
+import { GiCheckedShield } from "react-icons/gi";
 
 const SideNavbarBase = () => {
     const isSidebarVisible = appUiStore.use.isSidebarVisible();
@@ -51,33 +45,16 @@ const SideNavbarBase = () => {
             path: "/editProfile",
             // isHidden: !isLocalEnvironnement
         },
+
         {
-            icon: <MdLeaderboard color="#4159F9" size={25} />,
-            title: "Leaderboard",
-            path: "/home",
-            isHidden: !isLocalEnvironnement,
-        },
-        {
-            icon: <IoMdInformationCircleOutline color="#4159F9" size={25} />,
-            title: "About Us",
-            path: "/home",
-            isHidden: !isLocalEnvironnement,
+            icon: <GiCheckedShield color="#4159F9" size={25} />,
+            title: "Terms & Conditions",
+            path: "/terms&Conditions",
         },
         {
             icon: <RiCustomerService2Fill color="#4159F9" size={25} />,
             title: "Support",
-            path: "/home",
-        },
-        {
-            icon: <RiFeedbackFill color="#4159F9" size={25} />,
-            title: "Feedback",
-            path: "/home",
-            isHidden: !isLocalEnvironnement,
-        },
-        {
-            icon: <FaShare color="#4159F9" size={25} />,
-            title: "Share App",
-            path: "/home",
+            path: "/support",
         },
     ];
 
@@ -91,9 +68,7 @@ const SideNavbarBase = () => {
                     <div className="relative">
                         <div
                             className="absolute right-0 z-50 top-4"
-                            onClick={() =>
-                                setPanelSidebarState({ newState: false })
-                            }
+                            onClick={() => setPanelSidebarState({ newState: false })}
                         >
                             <RiCloseFill color="#4159F9" size={30} />
                         </div>
@@ -106,13 +81,7 @@ const SideNavbarBase = () => {
                                     color="success"
                                     src={appLogo}
                                     size="lg"
-                                    fallback={
-                                        <Avatar
-                                            src={demoUser}
-                                            size="lg"
-                                            showFallback
-                                        />
-                                    }
+                                    fallback={<Avatar src={demoUser} size="lg" showFallback />}
                                     showFallback
                                 />
                             </div>
@@ -142,9 +111,7 @@ const SideNavbarBase = () => {
                                 }}
                             >
                                 {data.icon}
-                                <h1 className="text-lg font-semibold text-black">
-                                    {data.title}
-                                </h1>
+                                <h1 className="text-lg font-semibold text-black">{data.title}</h1>
                             </div>
                         );
                     })}
@@ -159,9 +126,7 @@ const SideNavbarBase = () => {
                         }}
                     >
                         <GrLogout color="black" size={20} />
-                        <h1 className="text-lg font-semibold text-black">
-                            Logout
-                        </h1>
+                        <h1 className="text-lg font-semibold text-black">Logout</h1>
                     </div>
                 </div>
             </div>

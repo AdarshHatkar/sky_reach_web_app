@@ -9,7 +9,7 @@
 			"}",
 			"",
 			"",
-			"export function ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}({test }: T${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}) {",
+			"export default function ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}({test }: T${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}) {",
 			"    return <>",
 			"         $0",
 			"    </>;",

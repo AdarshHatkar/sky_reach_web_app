@@ -45,11 +45,19 @@ current_version=$(jq -r '.version' package.json)
 # Check if the current version matches the last version in deploy.json
 # Check if the current version matches the last version in deploy.json
 if [ "$current_version" == "$last_version" ]; then
-   echo "Incrementing version..."
-    # Auto-increment version using npm script
+    echo "Error: The current version $current_version matches the last deployed version."
+    echo "Please update the version in package.json before deploying."
+    echo "Do you want to auto-increment the version? (y/n)"
+    read -r -t 10 -n 1 answer
+    if [ "$answer" == "y" ]; then
+        # Auto-increment version using npm script
         bash bashScripts/increment-version.sh || display_error "Failed to auto-increment version using npm script."
         # Reload current version from package.json
         current_version=$(jq -r '.version' package.json) || display_error "Failed to read version from package.json after auto-increment."
+    else
+        echo "Closing program."
+        exit 1
+    fi
 fi
 
 

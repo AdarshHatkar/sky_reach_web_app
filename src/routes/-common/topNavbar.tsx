@@ -2,15 +2,15 @@
 
 import { twMerge } from "tailwind-merge";
 
-import { Avatar, Image } from "@nextui-org/react";
+import { Avatar } from "@nextui-org/react";
 import { Link, useNavigate, useRouter } from "@tanstack/react-router";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import coinImg from "../../assets/images/coin3.png";
-import demoUser from "../../assets/images/demoUserProfile.png";
+import { BsChatLeftDots } from "react-icons/bs";
 import { TCleanedNavigateOptions } from "../../helpers/types/routes";
+import { FaPlus } from "react-icons/fa6";
 import { appUiStore } from "../../stores/appUiStore";
 import { gamingAppStore } from "../../stores/gamingAppStore";
-import { NotificationIcon } from "./svgComponents/notificationIcon";
+import { LuWallet } from "react-icons/lu";
 
 type TTopNavbar = {
     title: string;
@@ -21,6 +21,9 @@ type TTopNavbar = {
     isNotificationIconVisible?: boolean;
     isEditIconVisible?: boolean;
     isHomePage?: boolean;
+    goBackIconColor?: string;
+    isShareIconAccessible?: boolean;
+    isChatIconAccessible?: boolean;
 };
 
 const TopNavbar = ({
@@ -32,13 +35,18 @@ const TopNavbar = ({
     isNotificationIconVisible = false,
     isEditIconVisible = false,
     isHomePage = false,
+    goBackIconColor = "white",
+    isChatIconAccessible = false,
 }: TTopNavbar) => {
     const navigate = useNavigate({ from: "/" });
 
     const router = useRouter();
     const appName = gamingAppStore.use.appName();
-
+    const appSlug = gamingAppStore.use.appSlug();
     const appLogo = gamingAppStore.use.appLogo();
+
+    const namePart = appName.split(/\d+/)[0]; // "PLAY"
+    const numberPart = appName.split(/\D+/).filter(Boolean).join(""); // "124"
 
     const goBackFun = () => {
         if (goBackPath) {
@@ -56,39 +64,34 @@ const TopNavbar = ({
     return (
         <div
             style={{ zIndex: 100 }}
-            className={` px-4 py-3  ${isBgTransparent ? "bg-transparent" : "bg-gradient-to-b from-[#074675] to-[#022445]"}  flex sticky top-0 items-center  justify-between rounded-b-[16px]`}
+            className={`text-black px-4 py-3  ${isBgTransparent ? "bg-[#EBF3FE]" : "bg-[#E9F4FD]"}  flex sticky top-0 items-center  justify-between rounded-b-[16px]`}
         >
             {isSidebarAccessible && (
                 <div className="flex items-center gap-2">
-                    <div
-                        className="flex items-center justify-center overflow-hidden bg-cover rounded-full w-9 h-9"
-                        onClick={() => {
-                            setPanelSidebarState({ newState: true });
-                        }}
-                    >
-                        {/* <img src={demoUser} alt="" /> */}
-                        <Avatar src={appLogo} fallback={<Avatar src={demoUser} showFallback />} showFallback />
+                    <div className="flex items-center justify-center overflow-hidden bg-cover rounded-full w-9 h-9">
+                        <Avatar src={appLogo} fallback={<Avatar src={appLogo} showFallback />} showFallback />
                     </div>
-                    {isHomePage && <h1 className="text-xl font-bold text-white whitespace-nowrap">{appName}</h1>}
+                    {isHomePage && (
+                        <h1 className="text-xl font-bold uppercase whitespace-nowrap">
+                            {"Sky"}
+                            <span className="text-blue-600">{"Reach"}</span>
+                        </h1>
+                    )}
                 </div>
             )}
             {!isSidebarAccessible && (
                 <div className="w-10 cursor-pointer " onClick={goBackFun}>
-                    <MdOutlineArrowBackIosNew className="h-full " color="white" size={25} />
+                    <MdOutlineArrowBackIosNew className="h-full " color={goBackIconColor} size={25} />
                 </div>
             )}
 
-            <div>
-                {!isHomePage && <p className={twMerge("text-xl font-bold text-white", titleClassName)}>{title}</p>}
-            </div>
-            <div className="flex gap-3">
-                {isEditIconVisible && <WalletBalanceIcon />}
-                {isNotificationIconVisible && (
-                    <Link to="/home" className="cursor-pointer">
-                        <NotificationIcon />
-                    </Link>
-                )}
+            <div>{!isHomePage && <p className={twMerge("text-xl font-bold ", titleClassName)}>{title}</p>}</div>
+            <div className="flex items-center justify-center gap-4">
+                {isChatIconAccessible && <BsChatLeftDots size={27} className="text-gray-400" />}
+
                 {!isNotificationIconVisible && <div className="w-10 cursor-pointer "></div>}
+
+                {isEditIconVisible && <WalletBalanceIcon appSlug={appSlug} />}
             </div>
         </div>
     );
@@ -96,15 +99,19 @@ const TopNavbar = ({
 
 export default TopNavbar;
 
-function WalletBalanceIcon() {
+type TWalletBalanceIcon = {
+    appSlug: string;
+};
+
+function WalletBalanceIcon({ appSlug }: TWalletBalanceIcon) {
     return (
-        <Link to="/home" className="flex items-center gap-[2px] cursor-pointer">
-            <h1 className="relative flex items-center h-[18px] p-1 pl-[26px] pr-1 text-sm font-medium text-white border-[0.2px] border-white  rounded-md">
-                <div className="absolute -left-[2px]">
-                    <Image src={coinImg} alt="coinImg" className="w-6" />
-                </div>
-                "XXX"
-            </h1>
+        <Link to="/" className="flex items-center gap-2 px-2 py-2 bg-white rounded-lg cursor-pointer">
+            <div className="relative flex items-center gap-2 text-base font-medium">
+                <LuWallet size={25} />
+                {"XXX"}
+            </div>
+            <div className="font-bold text-black">|</div>
+            <FaPlus className="text-black" />
         </Link>
     );
 }

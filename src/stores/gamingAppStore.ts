@@ -7,7 +7,6 @@ import { storeBaseName } from "./common";
 type TAppData = {
     appName: string;
 
-    appId: number;
     appLogo: string;
 };
 
@@ -16,7 +15,7 @@ type TGamingAppStore = TAppData & {
     isAppSlugVerified: boolean;
     updatedAt: number;
 
-    setGamingAppData: ({ appId, appName, appLogo }: TAppData) => void;
+    setGamingAppData: ({ appName, appLogo }: TAppData) => void;
     setGamingAppSlug: (appSlug: string) => void;
 };
 
@@ -32,17 +31,10 @@ const gamingAppStoreBase = create<TGamingAppStore>()(
                 appLogo: "",
                 updatedAt: unixTimeStampInSeconds(),
                 isAppSlugVerified: false,
-                setGamingAppData: ({ appId, appName, appLogo }) => {
-                    set({
-                        appId,
-                        appName,
-                        appLogo,
-                        isAppSlugVerified: true,
-                        updatedAt: unixTimeStampInSeconds(),
-                    });
+                setGamingAppData: ({ appName, appLogo }) => {
+                    set({ appName, appLogo, isAppSlugVerified: true, updatedAt: unixTimeStampInSeconds() });
                 },
-                setGamingAppSlug: (appSlug) =>
-                    set({ appSlug, isAppSlugVerified: false }),
+                setGamingAppSlug: (appSlug) => set({ appSlug, isAppSlugVerified: false }),
             }),
             {
                 name: `${storeBaseName}-gamingAppStore-v${gamingAppStoreVersion}`,

@@ -5,19 +5,21 @@ import { unixTimeStampInSeconds } from "../helpers/utilityHelper";
 import { storeBaseName } from "./common";
 
 type TTokens = {
-    accessToken: string;
-    refreshToken: string;
-};
+    accessToken: string
+    refreshToken: string
+}
 
 type TAuthStore = {
-    accessToken: string;
-    refreshToken: string;
-    updatedAt: number;
 
-    clearTokens: () => void;
-    setAuthData: ({ accessToken, refreshToken }: TTokens) => void;
-    updateAccessToken: (accessToken: string) => void;
-};
+    accessToken: string
+    refreshToken: string
+    updatedAt: number
+
+
+    clearTokens: () => void
+    setAuthData: ({ accessToken, refreshToken }: TTokens) => void
+    updateAccessToken: (accessToken: string) => void
+}
 
 const authStoreBase = create<TAuthStore>()(
     devtools(
@@ -26,21 +28,17 @@ const authStoreBase = create<TAuthStore>()(
                 accessToken: "",
                 refreshToken: "",
                 updatedAt: 0,
-                setAuthData: ({ accessToken, refreshToken }) =>
-                    set({
-                        accessToken,
-                        refreshToken,
-                        updatedAt: unixTimeStampInSeconds(),
-                    }),
-                updateAccessToken: (accessToken: string) =>
-                    set({ accessToken, updatedAt: unixTimeStampInSeconds() }),
+                setAuthData: ({ accessToken, refreshToken }) => set({ accessToken, refreshToken, updatedAt: unixTimeStampInSeconds() }),
+                updateAccessToken: (accessToken: string) => set({ accessToken, updatedAt: unixTimeStampInSeconds() }),
 
-                clearTokens: () =>
-                    set({
-                        accessToken: "",
-                        refreshToken: "",
-                        updatedAt: unixTimeStampInSeconds(),
+                clearTokens: () => set(
+                    {
+                        accessToken
+                            : "", refreshToken: "",
+                        updatedAt: unixTimeStampInSeconds()
                     }),
+
+
             }),
             {
                 name: `${storeBaseName}-authStore`,

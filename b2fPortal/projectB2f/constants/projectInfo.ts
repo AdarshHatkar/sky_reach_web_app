@@ -1,14 +1,15 @@
 export const projectInfo = {
-    name: "dummyx",
-    slug: "dummyx",
+    name: "Play124",
+    slug: "play124",
+    appId: 1,
     sections: {
         adminPanel: {
             name: "adminPanel",
             slug: "adminPanel",
         },
-        website: {
-            name: "website",
-            slug: "website",
+        staffPanel: {
+            name: "staffPanel",
+            slug: "staffPanel",
         },
         webApp: {
             name: "webApp",

@@ -3,10 +3,13 @@ import { devtools, persist } from "zustand/middleware";
 import { createZustandSelectors } from "../helpers/zustand/createZustandSelectors";
 import { storeBaseName } from "./common";
 
+export type TActiveTab = "contest" | "challenge" | "leaderboard" | "editProfile";
 type TAppUiStore = {
     isSidebarVisible: boolean;
     togglePanelSidebar: () => void;
     setPanelSidebarState: ({ newState }: { newState: boolean }) => void;
+    activeTab: TActiveTab;
+    setActiveTab: (newTab: TActiveTab ) => void;
 };
 
 const appUiStoreBase = create<TAppUiStore>()(
@@ -27,6 +30,10 @@ const appUiStoreBase = create<TAppUiStore>()(
                     set(() => {
                         return { isSidebarVisible: newState };
                     }),
+                activeTab: "contest",
+                setActiveTab: (tab) => set(() => ({
+                    activeTab: tab
+                })),
             }),
             {
                 name: `${storeBaseName}-gamingAppStore`,

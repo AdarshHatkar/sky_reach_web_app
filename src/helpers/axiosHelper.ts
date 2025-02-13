@@ -1,7 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import { authStore } from "../stores/authStore";
-import { gamingAppStore } from "../stores/gamingAppStore";
 import { restBaseUrl } from "./config";
 import { myToast } from "./utilityHelper";
 
@@ -102,18 +101,13 @@ export const setupAxiosInstance = () => {
         method: "get",
         baseURL: restBaseUrl,
         timeout: 60 * 1000,
-        headers: {
-            Authorization: `Bearer ${authStore.getState().accessToken}`,
-        },
-        params: { appId: gamingAppStore.getState().appId },
+        headers: { Authorization: `Bearer ${authStore.getState().accessToken}` },
     });
 
     callTheGamingAppServerPost = axios.create({
         method: "post",
         baseURL: restBaseUrl,
         timeout: 60 * 1000,
-        headers: {
-            Authorization: `Bearer ${authStore.getState().accessToken}`,
-        },
+        headers: { Authorization: `Bearer ${authStore.getState().accessToken}` },
     });
 };

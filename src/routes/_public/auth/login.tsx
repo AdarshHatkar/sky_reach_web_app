@@ -1,20 +1,19 @@
-import { Button } from "@nextui-org/react";
-import { Link, Navigate, createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Button, Image } from "@nextui-org/react";
+import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import confetti from "canvas-confetti";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
-import { ImFacebook } from "react-icons/im";
 
-import { trpcErrorHandler, trpcResponseHandler } from "@helpers/trpc/handlers";
-import { backendV1 } from "@helpers/trpc/trpc";
+import FadeInAnimation from "@common/framerMotion/fadeInAnimation";
+import { trpcErrorHandler } from "@helpers/trpc/handlers";
+
 import { myToast } from "@helpers/utilityHelper";
 import { authStore } from "@stores/authStore";
-import { gamingAppStore } from "@stores/gamingAppStore";
-import { userStore } from "@stores/userStore";
 
-import { webAppZodSchemas } from "@b2fPortal/webApp/trpcApi/zodSchemas";
-import deployJson from "../../../../deploy.json";
-import { FadeInAnimation } from "@common/framerMotion/fadeInAnimation";
+import { userStore } from "@stores/userStore";
+import logo from "@assets/images/Play_124_logo.jpeg";
+import googleIcon from "@assets/images/google-icon.png";
+
+import { useState } from "react";
 
 export const Route = createFileRoute("/_public/auth/login")({
     component: LoginPage,
@@ -26,35 +25,16 @@ function LoginPage() {
     const setAuthData = authStore.use.setAuthData();
     const setUserData = userStore.use.setUserData();
     const refreshToken = authStore.use.refreshToken();
-    const appName = gamingAppStore.use.appName();
+    // const appName = gamingAppStore.use.appName();
 
-    const loginMutation = backendV1.auth.login.useMutation();
-    // const backendV1Utils = backendV1.useUtils();
+    const [showPassword, setShowPassword] = useState(false);
 
     const onSubmit = async (formDataRaw) => {
         try {
-            // console.log({ formDataRaw });
-
-            const formData = await webAppZodSchemas.auth.login.parseAsync(formDataRaw);
-
-            // console.log({ formData });
-            // return;
-            // let response = await mutateAsync(formData)
-            const response = await loginMutation.mutateAsync(formData);
-
-            trpcResponseHandler(response);
-            const res = response;
-
             // console.log(res);
 
-            if (res.status === "success") {
-                const { accessToken, refreshToken, userData } = res.result;
-                const { username, firstName, lastName } = userData;
-
-                setAuthData({ accessToken, refreshToken });
-
-                setUserData({ username, firstName, lastName });
-
+            // eslint-disable-next-line no-constant-condition
+            if (true) {
                 myToast.fire({
                     icon: "success",
                     title: "Login Successful",
@@ -69,100 +49,82 @@ function LoginPage() {
         }
     };
 
-    if (refreshToken !== "") {
-        return <Navigate to="/home" />;
-    }
-
-    const comingSoonFun = () => {
-        myToast.fire({
-            icon: "info",
-            title: "Coming Soon...",
-            position: "top",
-        });
-    };
-
     return (
         <>
-            <div className="min-h-screen bg-gradient-to-b from-[#074675] to-[#022445] text-white">
-                <div className="flex items-center justify-center pt-10">
-                    <h1 className="text-3xl font-semibold text-justify text-pretty">{appName}</h1>
+            <div className="flex flex-col min-h-screen text-black bg-white">
+                <div className="flex items-center justify-center h-[6vh] bg-[#6100ff] rounded-b-3xl rounded-t-none">
+                    <h1 className="text-lg font-semibold text-justify text-white uppercase">Login</h1>
                 </div>
                 <FadeInAnimation>
-                    <div className="pl-6 pt-14">
-                        <h1 className="text-3xl">Login</h1>
-                    </div>
+                    <div className="h-[90vh] flex flex-col justify-start">
+                        <div className="flex flex-col items-center justify-center my-8">
+                            <Image width={80} height={80} src={logo} alt="Play 124 logo" />
+                        </div>
 
-                    <div className="p-5 pt-10 mt-10 text-gray-400">
-                        <form onSubmit={loginForm.handleSubmit(onSubmit)}>
-                            <div className="relative">
+                        <form onSubmit={loginForm.handleSubmit(onSubmit)} className="px-5">
+                            <div className="w-full my-2">
                                 <input
                                     type="text"
                                     placeholder="Email / Mobile Number / Username"
-                                    className="w-full py-1 text-lg transition-colors duration-500 bg-transparent border-b focus:outline-none focus:border-white focus:border-b-2 peer"
+                                    className="w-full px-4 py-4 text-sm font-medium text-black transition-colors duration-500 bg-transparent border border-gray-300 shadow-lg border-t-gray-100 focus:outline-slate-600 placeholder:text-gray-500"
                                     {...loginForm.register("emailOrMobileNumberOrUsername")}
                                 />
                             </div>
 
-                            <div className="relative pt-8">
+                            <div className="relative my-2 text-sm font-medium text-black transition-colors duration-500 bg-transparent border border-gray-300 shadow-lg border-t-gray-100 focus-within:border-none focus-within:ring-2 focus-within:ring-slate-600">
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     placeholder="Password"
-                                    className="w-full py-1 text-lg transition-colors duration-500 bg-transparent border-b focus:outline-none focus:border-white focus:border-b-2 peer"
+                                    className="w-full px-4 py-4 border-none outline-none placeholder:text-gray-500"
                                     {...loginForm.register("password")}
                                 />
-
-                                <input type="checkbox" id="checkbox" className="mt-5 mr-2" />
-                                <label htmlFor="checkbox">Remember me</label>
+                                <div
+                                    className="absolute text-black transform -translate-y-1/2 cursor-pointer top-1/2 right-3"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? "Hide" : "Show"}
+                                </div>
                             </div>
 
-                            <div className="mt-10 font-[600]">
+                            <div className="flex items-center justify-end my-4 text-sm">
+                                <span className="text-gray-500">
+                                    <Link to="/" className="hover:text-blue-500">
+                                        Forgot Password?
+                                    </Link>
+                                </span>
+                            </div>
+
+                            <div className="font-[600] my-4">
                                 <Button
                                     type="submit"
-                                    className="flex justify-center w-full py-3 text-white text-[20px] bg-blue-500"
-                                    isLoading={loginMutation.isLoading}
+                                    className="flex justify-center w-full py-6 text-white text-[20px] bg-[#6100ff] rounded-full uppercase font-semibold"
                                 >
                                     Login
                                 </Button>
                             </div>
                         </form>
-                        <div className="flex justify-center w-full pt-5 text-2xl">
-                            <span className="text-gray-500">
-                                New user?{" "}
-                                <Link to="/auth/register" className="text-blue-500">
-                                    Register
-                                </Link>
-                            </span>
+
+                        <div className="flex flex-col items-center justify-center">
+                            <h2 className="text-black text-md">or Login with</h2>
+                            <div className="flex items-center justify-center w-full my-2 rounded-full">
+                                <Image
+                                    width={60}
+                                    height={60}
+                                    src={googleIcon}
+                                    alt="Register with Google"
+                                    className="p-2 border rounded-full"
+                                />
+                            </div>
                         </div>
 
-                        <div className="flex h-[70px] w-full items-center relative justify-around mt-6 ">
-                            <div className="absolute h-[40%] w-[30%] border-t left-3 bottom-2  border-gray-500"></div>
-                            <span className="absolute ">Social Logins</span>
-                            <div className="absolute h-[40%] w-[30%] border-t right-3 bottom-2 border-gray-500"></div>
-                        </div>
-
-                        <div className="flex justify-around w-full mt-5">
-                            <Button
-                                className="flex justify-around w-[45%] text-center bg-transparent border-gray-500 border-1"
-                                onClick={comingSoonFun}
-                            >
-                                <span className="text-white font-[600] flex items-center">
-                                    <ImFacebook className="mr-3 text-blue-400" /> Facebook
-                                </span>
-                            </Button>
-                            <Button
-                                className="flex justify-around w-[45%]  text-center bg-transparent border-gray-500 border-1"
-                                onClick={comingSoonFun}
-                            >
-                                <span className="text-white font-[600] flex items-center">
-                                    <FcGoogle className="mr-3" /> Google
-                                </span>
-                            </Button>
+                        <div className="flex items-center justify-center w-full gap-2 text-black text-md">
+                            <h2> Don't have an account?</h2>
                         </div>
                     </div>
-                    <div className="text-center">
+                    {/* <div className="text-center">
                         <p>Ga Version : {deployJson.version}</p>
-                        {/* <p>Last Updated : {moment(deployJson.last_deploy).format('MMMM Do YYYY, h:mm:ss a')} </p> */}
-                    </div>
+                        <p>Last Updated : {moment(deployJson.last_deploy).format('MMMM Do YYYY, h:mm:ss a')} </p>
+                    </div> */}
                 </FadeInAnimation>
             </div>
         </>

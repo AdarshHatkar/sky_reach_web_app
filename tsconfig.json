@@ -20,20 +20,18 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-
     /* Custom */
     "paths": {
       "@assets/*": ["./src/assets/*"],
       "@stores/*": ["./src/stores/*"],
       "@helpers/*": ["./src/helpers/*"],
       "@common/*": ["./src/routes/-common/*"],
-
-     "@b2fPortal/*": ["./b2fPortal/*"],
-     "@serverB2f/*": ["./b2fPortal/serverB2f/*"],
-      "@dummyxPrisma/*": ["./b2fPortal/prisma/dummyx/*"],
-      "@dummyxProjectB2f/*": ["./b2fPortal/projectB2f/*"]
+      "@b2fPortal/*": ["./b2fPortal/*"],
+      "@serverB2f/*": ["./b2fPortal/serverB2f/*"],
+      "@play124Prisma/*": ["./b2fPortal/prisma/play124/*"],
+      "@play124ProjectB2f/*": ["./b2fPortal/projectB2f/*"]
     }
   },
-  "include": ["src","b2fPortal"],
+  "include": ["src", "b2fPortal"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

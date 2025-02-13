@@ -1,111 +1,118 @@
-const walletTypesArr = ["winWallet", "depositWallet"] as const;
+// const walletTypesArr = ["winWallet", "depositWallet"] as const;
 
-export type TWalletTypes = (typeof walletTypesArr)[number];
+// export type TWalletTypes = typeof walletTypesArr[number];
 
-type TWalletTypesObject = {
-    [K in TWalletTypes]: K;
-};
+// type TWalletTypesObject = {
+//     [K in TWalletTypes]: K;
+// };
 
-const walletTypesObj = Object.fromEntries(
-    walletTypesArr.map((status) => [status, status])
-) as TWalletTypesObject;
+// const walletTypesObj = Object.fromEntries(
+//     walletTypesArr.map(status => [status, status])
+// ) as TWalletTypesObject;
 
-export const walletTypes = {
-    arr: walletTypesArr,
-    obj: walletTypesObj,
-};
+// export const walletTypes = {
+//     arr: walletTypesArr,
+//     obj: walletTypesObj
+// };
 
-const transactionTypesArr = ["credit", "debit"] as const;
+// const transactionTypesArr = ["credit", "debit"] as const;
 
-export type TTransactionTypes = (typeof transactionTypesArr)[number];
+// export type TTransactionTypes = (typeof transactionTypesArr)[number];
 
-type TTransactionTypesObj = {
-    [K in TTransactionTypes]: K;
-};
+// type TTransactionTypesObj = {
+//     [K in TTransactionTypes]: K;
+// };
 
-const transactionTypesObj = Object.fromEntries(
-    transactionTypesArr.map((status) => [status, status])
-) as TTransactionTypesObj;
+// const transactionTypesObj = Object.fromEntries(
+//     transactionTypesArr.map((status) => [status, status])
+// ) as TTransactionTypesObj;
 
-export const transactionTypes = {
-    arr: transactionTypesArr,
-    obj: transactionTypesObj,
-};
+// export const transactionTypes = {
+//     arr: transactionTypesArr,
+//     obj: transactionTypesObj,
+// };
 
-const withdrawalMethodTypesArr = ["mobileNumber", "email", "upiId"] as const;
+// const withdrawalMethodTypesArr = ["mobileNumber", "email", "upiId"] as const;
 
-export type TWithdrawalMethodTypes = (typeof withdrawalMethodTypesArr)[number];
+// export type TWithdrawalMethodTypes = (typeof withdrawalMethodTypesArr)[number];
 
-type TWithdrawalMethodTypesObj = {
-    [K in TWithdrawalMethodTypes]: K;
-};
+// type TWithdrawalMethodTypesObj = {
+//     [K in TWithdrawalMethodTypes]: K;
+// };
 
-const withdrawalMethodTypesObj = Object.fromEntries(
-    withdrawalMethodTypesArr.map((status) => [status, status])
-) as TWithdrawalMethodTypesObj;
+// const withdrawalMethodTypesObj = Object.fromEntries(
+//     withdrawalMethodTypesArr.map((status) => [status, status])
+// ) as TWithdrawalMethodTypesObj;
 
-export const withdrawalMethodTypes = {
-    arr: withdrawalMethodTypesArr,
-    obj: withdrawalMethodTypesObj,
-};
+// export const withdrawalMethodTypes = {
+//     arr: withdrawalMethodTypesArr,
+//     obj: withdrawalMethodTypesObj,
+// };
 
-const manualDepositRequestsStatusArr = [
-    "pending",
-    "approved",
-    "rejected",
-] as const;
+// const manualDepositRequestsStatusArr = ["pending", "approved", "rejected"] as const;
 
-export type TManualDepositRequestsStatus =
-    (typeof manualDepositRequestsStatusArr)[number];
+// export type TManualDepositRequestsStatus = (typeof manualDepositRequestsStatusArr)[number];
 
-type TManualDepositRequestsStatusObj = {
-    [K in TManualDepositRequestsStatus]: K;
-};
+// type TManualDepositRequestsStatusObj = {
+//     [K in TManualDepositRequestsStatus]: K;
+// };
 
-const manualDepositRequestsStatusObj = Object.fromEntries(
-    manualDepositRequestsStatusArr.map((status) => [status, status])
-) as TManualDepositRequestsStatusObj;
+// const manualDepositRequestsStatusObj = Object.fromEntries(
+//     manualDepositRequestsStatusArr.map((status) => [status, status])
+// ) as TManualDepositRequestsStatusObj;
 
-export const manualDepositRequestsStatus = {
-    arr: manualDepositRequestsStatusArr,
-    obj: manualDepositRequestsStatusObj,
-};
+// export const manualDepositRequestsStatus = {
+//     arr: manualDepositRequestsStatusArr,
+//     obj: manualDepositRequestsStatusObj,
+// };
 
-const withdrawalRequestsStatusArr = [
-    "pending",
-    "approved",
-    "rejected",
-] as const;
+// const withdrawalRequestsStatusArr = ["pending", "approved", "rejected"] as const;
 
-export type TWithdrawalRequestsStatus =
-    (typeof withdrawalRequestsStatusArr)[number];
+// export type TWithdrawalRequestsStatus = (typeof withdrawalRequestsStatusArr)[number];
 
-type TWithdrawalRequestsStatusObj = {
-    [K in TWithdrawalRequestsStatus]: K;
-};
+// type TWithdrawalRequestsStatusObj = {
+//     [K in TWithdrawalRequestsStatus]: K;
+// };
 
-const withdrawalRequestsStatusObj = Object.fromEntries(
-    withdrawalRequestsStatusArr.map((status) => [status, status])
-) as TWithdrawalRequestsStatusObj;
+// const withdrawalRequestsStatusObj = Object.fromEntries(
+//     withdrawalRequestsStatusArr.map((status) => [status, status])
+// ) as TWithdrawalRequestsStatusObj;
 
-export const withdrawalRequestsStatus = {
-    arr: withdrawalRequestsStatusArr,
-    obj: withdrawalRequestsStatusObj,
-};
+// export const withdrawalRequestsStatus = {
+//     arr: withdrawalRequestsStatusArr,
+//     obj: withdrawalRequestsStatusObj,
+// };
 
-const paymentGatewayNamesArr = ["manualUpi"] as const;
+// const paymentGatewayNamesArr = ["manualUpi", "khiladixproGateway"] as const;
 
-export type TPaymentGatewayNames = (typeof paymentGatewayNamesArr)[number];
+// export type TPaymentGatewayNames = (typeof paymentGatewayNamesArr)[number];
 
-type TPaymentGatewayNamesObj = {
-    [K in TPaymentGatewayNames]: K;
-};
+// type TPaymentGatewayNamesObj = {
+//     [K in TPaymentGatewayNames]: K;
+// };
 
-const paymentGatewayNamesObj = Object.fromEntries(
-    paymentGatewayNamesArr.map((status) => [status, status])
-) as TPaymentGatewayNamesObj;
+// const paymentGatewayNamesObj = Object.fromEntries(
+//     paymentGatewayNamesArr.map((status) => [status, status])
+// ) as TPaymentGatewayNamesObj;
 
-export const paymentGatewayNames = {
-    arr: paymentGatewayNamesArr,
-    obj: paymentGatewayNamesObj,
-};
+// export const paymentGatewayNames = {
+//     arr: paymentGatewayNamesArr,
+//     obj: paymentGatewayNamesObj,
+// };
+
+// const depositStatusArr = ["pending", "success", "failed"] as const;
+
+// export type TDepositStatus = (typeof depositStatusArr)[number];
+
+// type TDepositStatusObj = {
+//     [K in TDepositStatus]: K;
+// };
+
+// const depositStatusObj = Object.fromEntries(
+//     depositStatusArr.map((status) => [status, status])
+// ) as TDepositStatusObj;
+
+// export const depositStatus = {
+//     arr: depositStatusArr,
+//     obj: depositStatusObj,
+// };

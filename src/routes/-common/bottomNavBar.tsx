@@ -1,59 +1,43 @@
-import { useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { AiFillHome } from "react-icons/ai";
-import { CgMoreO } from "react-icons/cg";
-import { FaGift } from "react-icons/fa";
-import { TCleanedNavigateOptions } from "../../helpers/types/routes";
-import { appUiStore } from "../../stores/appUiStore";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
+import { TBottomNavbarItems } from "./bottomNavBarItems";
+import { appUiStore, TActiveTab } from "@stores/appUiStore";
 
-export function BottomNavBar() {
+export function BottomNavBar({ bottomNavbarItems }: { bottomNavbarItems: TBottomNavbarItems }) {
     const navigate = useNavigate({ from: "/" });
-    const setPanelSidebarState = appUiStore.use.setPanelSidebarState();
-    const [bottomIconSelected, setBottomIconSelected] = useState(1);
+    // const setPanelSidebarState = appUiStore.use.setPanelSidebarState();
 
-    type TBottomNavbarItems = {
-        text: string;
-        icon: JSX.Element;
-        path: TCleanedNavigateOptions;
-    }[];
+    const activeTab = appUiStore.use.activeTab();
+    const setActiveTab = appUiStore.use.setActiveTab();
 
-    const bottomNavbarItems: TBottomNavbarItems = [
-        {
-            text: "Earn",
-            icon: <FaGift color="white" size={"23px"} />,
-            path: "/home",
-        },
-        {
-            text: "Home",
-            icon: <AiFillHome color="white" size={"23px"} />,
-            path: "/home",
-        },
-        {
-            text: "More",
-            icon: <CgMoreO color="white" size={"23px"} />,
-            path: "/home",
-        },
-    ];
+    const routerState = useRouterState();
+    const currentPath = routerState.location.pathname;
+
+    /**
+     * * Dynamically replaces $appSlug in navbar paths with the actual app slug from the URL and finds the active tab index
+     */
+    const appSlug = currentPath.split("/")[1];
+    const updatedNavbarItems = bottomNavbarItems.map((item) => ({
+        ...item,
+        path: item.path?.replace("$appSlug", appSlug),
+    }));
 
     return (
-        <div className="px-2 pb-1 rounded-t-[16px] bg-gradient-to-b from-[#022445] to-[#074675] ">
-            <div className="flex items-center justify-between h-full text-white">
-                {bottomNavbarItems.map((data, index) => {
+        <div className="sticky bottom-0 px-2 pb-1 bg-white rounded-3xl">
+            <div className="flex items-center h-full">
+                {updatedNavbarItems.map((data, index) => {
                     return (
                         <div
                             key={index}
-                            className={`flex flex-col items-center justify-center px-8 py-2 border-b-3 ${bottomIconSelected === index ? "border-black bg-black/10 backdrop-blur-sm" : "border-transparent"}`}
+                            className={`flex flex-col items-center justify-center w-1/${bottomNavbarItems.length} mx-auto py-2
+                                border-transparent`}
                             onClick={() => {
-                                if (index === 2) {
-                                    setPanelSidebarState({ newState: true });
-                                } else {
-                                    setBottomIconSelected(index);
-                                    navigate({ to: data.path, params: {} });
+                                if (data.path) navigate({ to: data.path });
+                                if (["contest", "challenge", "leaderboard", "editProfile"].includes(data.key)) {
+                                    setActiveTab(data.key as TActiveTab);
                                 }
                             }}
                         >
                             {data.icon}
-                            <h1 className="text-sm">{data.text}</h1>
                         </div>
                     );
                 })}
@@ -61,5 +45,3 @@ export function BottomNavBar() {
         </div>
     );
 }
-
-export default BottomNavBar;

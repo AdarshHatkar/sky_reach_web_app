@@ -1,1 +1,1 @@
-export const storeBaseName = "dummyx_webApp";
+export const storeBaseName = "play124_webApp";

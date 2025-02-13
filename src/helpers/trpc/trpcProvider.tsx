@@ -3,13 +3,13 @@ import { httpBatchLink } from "@trpc/client";
 import { useCallback, useEffect, useState } from "react";
 import superjson from "superjson";
 
-import { authStore } from "../../stores/authStore";
-import { gamingAppStore } from "../../stores/gamingAppStore";
 import { trpcBaseUrl } from "../config";
 import { fetcher } from "./fetcher";
-import { backendV1 } from "./trpc";
+import { backendV2 } from "./trpc";
+import { authStore } from "../../stores/authStore";
+import { gamingAppStore } from "../../stores/gamingAppStore";
 
-export function TrpcProvider(props: { children: React.ReactNode }) {
+export default function TrpcProvider(props: { children: React.ReactNode }) {
     const appSlug = gamingAppStore.use.appSlug();
 
     // The function which needed to be called in every request
@@ -24,10 +24,10 @@ export function TrpcProvider(props: { children: React.ReactNode }) {
     const [queryClient] = useState(() => new QueryClient());
 
     const createTrpcClientFunction = useCallback(() => {
-        return backendV1.createClient({
+        return backendV2.createClient({
             links: [
                 httpBatchLink({
-                    url: `${trpcBaseUrl}`,
+                    url: `${trpcBaseUrl}/${appSlug}`,
                     headers: headerFn,
                     fetch: fetcher,
                 }),
@@ -35,7 +35,7 @@ export function TrpcProvider(props: { children: React.ReactNode }) {
 
             transformer: superjson,
         });
-    }, []);
+    }, [appSlug]);
     const [trpcClient, setTrpcClient] = useState(createTrpcClientFunction);
     useEffect(() => {
         //  console.log("new appUsername: " + appData?.appUsername);
@@ -43,11 +43,11 @@ export function TrpcProvider(props: { children: React.ReactNode }) {
     }, [createTrpcClientFunction]);
 
     return (
-        <backendV1.Provider client={trpcClient} queryClient={queryClient}>
+        <backendV2.Provider client={trpcClient} queryClient={queryClient}>
             <QueryClientProvider client={queryClient}>
                 {props.children}
                 {/* <ReactQueryDevtools initialIsOpen={false} /> */}
             </QueryClientProvider>
-        </backendV1.Provider>
+        </backendV2.Provider>
     );
 }

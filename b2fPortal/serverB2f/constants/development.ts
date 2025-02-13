@@ -1,6 +1,6 @@
 const localHostname = "localhost";
 
-export const localPort = 3201;
+export const localPort = 3221;
 try {
     // if (window) {
     //     localHostname = window.location.hostname;
@@ -14,9 +14,9 @@ export const localTunnelSubdomain = "shared-two-dev";
 export const backendEndpoint = {
     development: {
         local: `http://${localHostname}:${localPort}`,
-        remote: `https://s1-api.primexop.com`,
+        remote: `https://s2-api-dev.primexop.com`,
     },
     production: {
-        remote: "https://s1-api.primexop.com",
+        remote: "https://s2-api.primexop.com",
     },
 };

@@ -3,17 +3,18 @@
 export {};
 declare global {
     interface Window {
-        Android: any; // this will be your variable name
-        updateTrpcClient: any;
+        Android: any;  // this will be your variable name
+        updateTrpcClient: any;  
     }
     namespace Express {
-        export interface Request {
-            appData?: appDataType;
-        }
-    }
-}
+      export interface Request {
+          appData?: appDataType;
+
+      }
+  }
+} 
 declare namespace JSX {
     interface IntrinsicElements {
-        "dotlottie-player": any;
+      "dotlottie-player": any;
     }
-}
+  }

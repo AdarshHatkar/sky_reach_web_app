@@ -21,11 +21,10 @@ const aliasObj: AliasOptions = {
     "@stores": path.resolve(__dirname, "./src/stores"),
     "@helpers": path.resolve(__dirname, "./src/helpers"),
     "@common": path.resolve(__dirname, "./src/routes/-common"),
-
     "@b2fPortal": path.resolve(__dirname, "./b2fPortal"),
     "@serverB2f": path.resolve(__dirname, "./b2fPortal/serverB2f"),
-    "@dummyxPrisma": path.resolve(__dirname, "./b2fPortal/prisma/dummyx"),
-    "@dummyxProjectB2f": path.resolve(__dirname, "./b2fPortal/projectB2f"),
+    "@play124Prisma": path.resolve(__dirname, "./b2fPortal/prisma/play124"),
+    "@play124ProjectB2f": path.resolve(__dirname, "./b2fPortal/projectB2f"),
 };
 
 export default defineConfig(({ command }) => {
@@ -36,7 +35,7 @@ export default defineConfig(({ command }) => {
                 outDir: "dist",
             },
             server: {
-                port: 3003,
+                port: 3013,
                 host: "127.0.0.1",
             },
             assetsInclude: ["**/*.lottie"],

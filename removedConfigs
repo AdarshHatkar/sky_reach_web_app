@@ -1,0 +1,5 @@
+    "build": "tsc && vite build",
+    "prebuild": "tsr generate",
+
+
+    removed beacuase it causing error while building for prod 

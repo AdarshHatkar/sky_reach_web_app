@@ -1,5 +1,5 @@
 // utils/trpc.ts
-import type { webAppTrpcRouterTypes } from "@b2fPortal/dist/dummyx/webApp/trpcApi/trpcRouter";
+import type { webAppTrpcRouterTypes } from "@b2fPortal/dist/play124/webApp/trpcApi/trpcRouter";
 import { createTRPCProxyClient, createTRPCReact, httpBatchLink } from "@trpc/react-query";
 
 import { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
@@ -10,7 +10,7 @@ import { gamingAppStore } from "../../stores/gamingAppStore";
 import { trpcBaseUrl } from "../config";
 import { fetcher } from "./fetcher";
 
-export const backendV1 = createTRPCReact<webAppTrpcRouterTypes>();
+export const backendV2 = createTRPCReact<webAppTrpcRouterTypes>();
 // export type TrpcReactQueryOptionsInfer = inferReactQueryProcedureOptions<webAppTrpcRouterTypes>;
 export type TBackedV1Input = inferRouterInputs<webAppTrpcRouterTypes>;
 export type TBackedV1Output = inferRouterOutputs<webAppTrpcRouterTypes>;
