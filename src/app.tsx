@@ -9,7 +9,7 @@ import "./global.css";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 
 // Import the generated route tree
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider } from "@heroui/react";
 import { routeTree } from "./routeTree.gen";
 
 // Create a new router instance
@@ -25,9 +25,9 @@ declare module "@tanstack/react-router" {
 function App() {
     return (
         <>
-            <NextUIProvider>
+            <HeroUIProvider>
                 <RouterProvider router={router} />
-            </NextUIProvider>
+            </HeroUIProvider>
         </>
     );
 }
