@@ -1,4 +1,4 @@
-import { Avatar, Button, Input, Radio, RadioGroup } from "@nextui-org/react";
+import { Avatar, Button, Input, Radio, RadioGroup } from "@heroui/react";
 import { createFileRoute } from "@tanstack/react-router";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";

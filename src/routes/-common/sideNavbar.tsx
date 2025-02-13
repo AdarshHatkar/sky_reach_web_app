@@ -1,4 +1,4 @@
-import { Avatar } from "@nextui-org/react";
+import { Avatar } from "@heroui/react";
 import { useNavigate } from "@tanstack/react-router";
 import { memo, useRef } from "react";
 import { FaUserEdit } from "react-icons/fa";

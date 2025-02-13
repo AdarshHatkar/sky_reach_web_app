@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import play124Logo from "@assets/images/Play_124_logo.jpeg";
 import TopNavbar from "@common/topNavbar";
 import { useState } from "react";

@@ -2,7 +2,7 @@
 
 import { twMerge } from "tailwind-merge";
 
-import { Avatar } from "@nextui-org/react";
+import { Avatar } from "@heroui/react";
 import { Link, useNavigate, useRouter } from "@tanstack/react-router";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { BsChatLeftDots } from "react-icons/bs";

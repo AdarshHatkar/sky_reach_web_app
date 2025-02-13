@@ -53,10 +53,6 @@
   "typescript.inlayHints.parameterNames.enabled": "all",
   "typescript.inlayHints.parameterTypes.enabled": true,
   "typescript.inlayHints.variableTypes.enabled": false,
-  "git.showActionButton": {
-    "commit": false,
-    "publish": false,
-    "sync": false
-  },
+
   "files.autoSave": "onFocusChange"
 }
