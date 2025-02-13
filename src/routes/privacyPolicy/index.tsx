@@ -1,7 +1,7 @@
 import TopNavbar from "@common/topNavbar";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_protected/privacyPolicy/")({
+export const Route = createFileRoute("/privacyPolicy/")({
     component: PrivacyPolicy,
 });
 

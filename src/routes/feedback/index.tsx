@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_protected/feedback/")({
+export const Route = createFileRoute("/feedback/")({
     component: FeedbackPage
 });
 

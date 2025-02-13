@@ -1,7 +1,7 @@
 import TopNavbar from "@common/topNavbar";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_protected/terms&Conditions/")({
+export const Route = createFileRoute("/terms&Conditions/")({
     component: TermsAndConditions,
 });
 function TermsAndConditions() {

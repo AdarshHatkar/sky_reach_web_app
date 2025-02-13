@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { CameraIcon } from "@common/svgComponents/cameraIcon";
 import TopNavbar from "@common/topNavbar";
 
-export const Route = createFileRoute("/_protected/editProfile/")({
+export const Route = createFileRoute("/editProfile/")({
     component: EditProfilePage,
 });
 

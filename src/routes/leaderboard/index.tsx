@@ -7,7 +7,7 @@ import { useState } from "react";
 import { bottomNavbarItems } from "@common/bottomNavBarItems";
 import { BottomNavBar } from "@common/bottomNavBar";
 
-export const Route = createFileRoute("/_protected/leaderboard/")({
+export const Route = createFileRoute("/leaderboard/")({
     component: LeaderboardPage,
 });
 

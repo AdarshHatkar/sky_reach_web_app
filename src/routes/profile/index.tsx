@@ -12,7 +12,7 @@ import { FiLogOut } from "react-icons/fi";
 import { GiCheckedShield } from "react-icons/gi";
 import { authStore } from "@stores/authStore";
 
-export const Route = createFileRoute("/_protected/profile/")({
+export const Route = createFileRoute("/profile/")({
     component: ProfilePage,
 });
 

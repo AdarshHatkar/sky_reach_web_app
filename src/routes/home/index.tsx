@@ -10,7 +10,7 @@ import { appUiStore } from "@stores/appUiStore";
 
 import { bottomNavbarItems } from "@common/bottomNavBarItems";
 
-export const Route = createFileRoute("/_protected/home/")({
+export const Route = createFileRoute("/home/")({
     component: HomePage,
 });
 

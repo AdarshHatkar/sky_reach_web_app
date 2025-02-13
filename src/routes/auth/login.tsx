@@ -14,7 +14,7 @@ import googleIcon from "@assets/images/google-icon.png";
 
 import { useState } from "react";
 
-export const Route = createFileRoute("/_public/auth/login")({
+export const Route = createFileRoute("/auth/login")({
     component: LoginPage,
 });
 

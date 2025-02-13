@@ -2,7 +2,7 @@ import TopNavbar from "@common/topNavbar";
 import { createFileRoute } from "@tanstack/react-router";
 import { FcOnlineSupport } from "react-icons/fc";
 
-export const Route = createFileRoute("/_public/support/")({
+export const Route = createFileRoute("/support/")({
     component: SupportPage,
 });
 
