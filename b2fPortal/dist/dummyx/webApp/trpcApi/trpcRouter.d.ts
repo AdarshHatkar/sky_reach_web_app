@@ -50,7 +50,7 @@ export declare const dummyxWebAppTrpcRouter: import("@trpc/server").CreateRouter
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
         }, {
-            status: "success" | "error";
+            status: "error" | "success";
             message: string;
             result?: {
                 accessToken: string;
@@ -88,7 +88,7 @@ export declare const dummyxWebAppTrpcRouter: import("@trpc/server").CreateRouter
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
         }, {
-            status: "success" | "error";
+            status: "error" | "success";
             message: string;
             result?: {
                 accessToken: string;
@@ -124,7 +124,7 @@ export declare const dummyxWebAppTrpcRouter: import("@trpc/server").CreateRouter
             _output_in: typeof import("@trpc/server").unsetMarker;
             _output_out: typeof import("@trpc/server").unsetMarker;
         }, {
-            status: "success" | "error";
+            status: "error" | "success";
             message: string;
             result?: {
                 accessToken: string;
@@ -164,7 +164,7 @@ export declare const dummyxWebAppTrpcRouter: import("@trpc/server").CreateRouter
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
             }, {
-                status: "success" | "error";
+                status: "error" | "success";
                 message: string;
                 result?: {
                     username: string;
@@ -207,7 +207,7 @@ export declare const dummyxWebAppTrpcRouter: import("@trpc/server").CreateRouter
                 _output_in: typeof import("@trpc/server").unsetMarker;
                 _output_out: typeof import("@trpc/server").unsetMarker;
             }, {
-                status: "success" | "error";
+                status: "error" | "success";
                 message: string;
                 result?: {
                     userId: number;
@@ -216,7 +216,7 @@ export declare const dummyxWebAppTrpcRouter: import("@trpc/server").CreateRouter
                     username: string;
                     email: string;
                     passwordHash: string;
-                    updatedAt: number | null;
+                    updatedAt: number;
                     createdAt: number;
                     mobileNumber: string;
                     countryCode: string;
