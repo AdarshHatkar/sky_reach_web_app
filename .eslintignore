@@ -37,4 +37,5 @@ tailwind.config.js
 *.json
 out/**.**
 .next/**.**
+tsconfig.json
 
