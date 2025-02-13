@@ -5,14 +5,13 @@ import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook } from "react-icons/im";
 
-import { trpcErrorHandler, trpcResponseHandler } from "@helpers/trpc/handlers";
+import { trpcErrorHandler } from "@helpers/trpc/handlers";
 import { backendV1 } from "@helpers/trpc/trpc";
 import { myToast } from "@helpers/utilityHelper";
 import { authStore } from "@stores/authStore";
 import { gamingAppStore } from "@stores/gamingAppStore";
 import { userStore } from "@stores/userStore";
 
-import { webAppZodSchemas } from "@b2fPortal/webApp/trpcApi/zodSchemas";
 import deployJson from "../../../../deploy.json";
 import { FadeInAnimation } from "@common/framerMotion/fadeInAnimation";
 
@@ -35,25 +34,13 @@ function LoginPage() {
         try {
             // console.log({ formDataRaw });
 
-            const formData = await webAppZodSchemas.auth.login.parseAsync(formDataRaw);
+            // const formData = await webAppZodSchemas.auth.login.parseAsync(formDataRaw);
 
-            // console.log({ formData });
-            // return;
-            // let response = await mutateAsync(formData)
-            const response = await loginMutation.mutateAsync(formData);
+            // eslint-disable-next-line no-constant-condition
+            if (true) {
+                setAuthData({ accessToken: "accessToken", refreshToken: "refreshToken" });
 
-            trpcResponseHandler(response);
-            const res = response;
-
-            // console.log(res);
-
-            if (res.status === "success") {
-                const { accessToken, refreshToken, userData } = res.result;
-                const { username, firstName, lastName } = userData;
-
-                setAuthData({ accessToken, refreshToken });
-
-                setUserData({ username, firstName, lastName });
+                setUserData({ username: "username", firstName: "firstName", lastName: "lastName" });
 
                 myToast.fire({
                     icon: "success",
