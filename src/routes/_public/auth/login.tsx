@@ -4,7 +4,6 @@ import confetti from "canvas-confetti";
 import { useForm } from "react-hook-form";
 
 import FadeInAnimation from "@common/framerMotion/fadeInAnimation";
-import { trpcErrorHandler } from "@helpers/trpc/handlers";
 
 import { myToast } from "@helpers/utilityHelper";
 import { authStore } from "@stores/authStore";
@@ -45,7 +44,7 @@ function LoginPage() {
                 navigate({ to: "/home", replace: true });
             }
         } catch (error) {
-            trpcErrorHandler(error);
+            console.log(error);
         }
     };
 
